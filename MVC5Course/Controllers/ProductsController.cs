@@ -156,7 +156,7 @@ namespace MVC5Course.Controllers
         }
 
         [HttpPost]
-        public ActionResult ProductUpdate( ViewModels.Products.ProductUpdateViewModel viewModel)
+        public ActionResult ProductUpdate(ViewModels.Products.ProductUpdateViewModel viewModel)
         {
             if (!ModelState.IsValid)
             {
@@ -170,6 +170,22 @@ namespace MVC5Course.Controllers
 
             product.InjectFrom(viewModel);
 
+            db.SaveChanges();
+
+
+            return RedirectToAction("ProductsRead");
+        }
+
+        public ActionResult DeleteProduct(int id)
+        {
+            var product = db.Product.Find(id);
+
+            if (null == product)
+            {
+                return HttpNotFound();
+            }
+
+            db.Product.Remove(product);
             db.SaveChanges();
 
 
