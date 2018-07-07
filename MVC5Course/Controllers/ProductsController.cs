@@ -14,10 +14,17 @@ namespace MVC5Course.Controllers
     {
         private FabricsEntities db = new FabricsEntities();
 
+        public ProductsController()
+        {
+            //db.Configuration.LazyLoadingEnabled = false;
+        }
+
         // GET: Products
         public ActionResult Index()
         {
-            return View(db.Product.ToList());
+            var data = db.Product.OrderByDescending(x => x.ProductId).Take(10).ToList();
+
+            return View(data);
         }
 
         // GET: Products/Details/5
