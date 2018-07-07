@@ -27,7 +27,7 @@ namespace MVC5Course.Controllers
             return View(data);
         }
 
-        public ActionResult Read()
+        public ActionResult ReadProducts()
         {
             var data = db.Product
                 .Where(x => x.Active == true)
