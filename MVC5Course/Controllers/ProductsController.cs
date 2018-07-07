@@ -27,7 +27,7 @@ namespace MVC5Course.Controllers
             return View(data);
         }
 
-        public ActionResult ReadProducts()
+        public ActionResult ProductsRead()
         {
             var data = db.Product
                 .Where(x => x.Active == true)
@@ -94,6 +94,17 @@ namespace MVC5Course.Controllers
                 return View(viewModel);
             }
 
+            Product product = new Product
+            {
+                ProductName = viewModel.ProductName,
+                Price = viewModel.Price,
+                Stock = viewModel.Stock,
+                Active = true
+            };
+
+            db.Product.Add(product);
+            db.SaveChanges();
+
             return RedirectToAction("ReadProducts");
         }
 
@@ -126,6 +137,40 @@ namespace MVC5Course.Controllers
                 return RedirectToAction("Index");
             }
             return View(product);
+        }
+
+        public ActionResult ProductUpdate(int id)
+        {
+            var product = db.Product.Find(id);
+
+            ViewModels.Products.ProductUpdateViewModel viewModel = new ViewModels.Products.ProductUpdateViewModel
+            {
+                ProductId = product.ProductId,
+                ProductName = product.ProductName,
+                Stock = product.Stock,
+                Price = product.Price
+            };
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public ActionResult ProductUpdate( ViewModels.Products.ProductUpdateViewModel viewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(viewModel);
+            }
+
+            var product = db.Product.Find(viewModel.ProductId);
+            product.Price = viewModel.Price;
+            product.ProductName = viewModel.ProductName;
+            product.Stock = product.Stock;
+
+            db.SaveChanges();
+
+
+            return RedirectToAction("ReadProducts");
         }
 
         // GET: Products/Delete/5
