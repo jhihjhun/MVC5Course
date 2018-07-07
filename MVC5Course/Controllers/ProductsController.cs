@@ -176,7 +176,7 @@ namespace MVC5Course.Controllers
             return RedirectToAction("ProductsRead");
         }
 
-        public ActionResult DeleteProduct(int id)
+        public ActionResult ProductDelete(int id)
         {
             var product = db.Product.Find(id);
 
