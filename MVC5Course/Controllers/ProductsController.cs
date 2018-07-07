@@ -81,6 +81,22 @@ namespace MVC5Course.Controllers
             return View(product);
         }
 
+        public ActionResult ProductCreate()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ProductCreate(ViewModels.Products.ProductCreateViewModel viewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(viewModel);
+            }
+
+            return RedirectToAction("ReadProducts");
+        }
+
         // GET: Products/Edit/5
         public ActionResult Edit(int? id)
         {

@@ -186,6 +186,7 @@
       <DependentUpon>Fabrics.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\Products\ProductCreateViewModel.cs" />
     <Compile Include="ViewModels\Products\ProductsReadViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -250,6 +251,7 @@
     <Content Include="Views\Products\Edit.cshtml" />
     <Content Include="Views\Products\Index.cshtml" />
     <Content Include="Views\Products\ReadProducts.cshtml" />
+    <Content Include="Views\Products\ProductCreate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
