@@ -5,36 +5,54 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Omu.ValueInjecter;
+using System.Net;
 
 namespace MVC5Course.Controllers
 {
     public class ClientController : Controller
     {
-        private readonly FabricsEntities db = new FabricsEntities();
+
+        //private readonly FabricsEntities db = new FabricsEntities();
+        private readonly ClientRepository _repo = RepositoryHelper.GetClientRepository();
 
         public ActionResult Read()
         {
-            var data = db.Client
-                .Take(10)
-                .Select(x => new ViewModels.Client.ClientReadViewModel.ClientListItem
-                {
-                    ClientId = x.ClientId,
-                    XCode = x.XCode,
-                    CreditRating = x.CreditRating,
-                    DateOfBirth = x.DateOfBirth,
-                    FirstName = x.FirstName,
-                    Gender = x.Gender,
-                    LastName = x.LastName,
-                    MiddleName = x.MiddleName,
-                    OccupationId = x.OccupationId,
-                    TelephoneNumber = x.TelephoneNumber,
-                }).ToList();
+            //    var data = db.Client
+            //        .Take(10)
+            //        .Select(x => new ViewModels.Client.ClientReadViewModel.ClientListItem
+            //        {
+            //            ClientId = x.ClientId,
+            //            XCode = x.XCode,
+            //            CreditRating = x.CreditRating,
+            //            DateOfBirth = x.DateOfBirth,
+            //            FirstName = x.FirstName,
+            //            Gender = x.Gender,
+            //            LastName = x.LastName,
+            //            MiddleName = x.MiddleName,
+            //            OccupationId = x.OccupationId,
+            //            TelephoneNumber = x.TelephoneNumber,
+            //        }).ToList();
 
-            ViewModels.Client.ClientReadViewModel viewModel = new ViewModels.Client.ClientReadViewModel();
+            var data = _repo.All()
+                                 .Take(10)
+                                 .Select(x => new ViewModels.Client.ClientReadViewModel.ClientListItem
+                                 {
+                                     ClientId = x.ClientId,
+                                     XCode = x.XCode,
+                                     CreditRating = x.CreditRating,
+                                     DateOfBirth = x.DateOfBirth,
+                                     FirstName = x.FirstName,
+                                     Gender = x.Gender,
+                                     LastName = x.LastName,
+                                     MiddleName = x.MiddleName,
+                                     OccupationId = x.OccupationId,
+                                     TelephoneNumber = x.TelephoneNumber,
+                                 }).ToList();
 
-
-            viewModel.ClientList = data;
-
+            ViewModels.Client.ClientReadViewModel viewModel = new ViewModels.Client.ClientReadViewModel
+            {
+                ClientList = data
+            };
 
             return View(viewModel);
         }
@@ -42,7 +60,7 @@ namespace MVC5Course.Controllers
         [HttpPost]
         public ActionResult Read(ViewModels.Client.ClientReadViewModel viewModel)
         {
-            var clientList = db.Client.AsQueryable();
+            var clientList = _repo.All();
 
             if (!string.IsNullOrEmpty(viewModel.Condiction.Keyword))
             {
@@ -71,7 +89,7 @@ namespace MVC5Course.Controllers
 
         public ActionResult Update(int id)
         {
-            var client = db.Client.Find(id);
+            var client = _repo.Find(id);
 
             if (null == client)
             {
@@ -111,7 +129,7 @@ namespace MVC5Course.Controllers
                 return View(viewModel);
             }
 
-            var client = db.Client.Find(viewModel.ClientId);
+            var client = _repo.Find(viewModel.ClientId);
 
             if (null == client)
             {
@@ -119,7 +137,57 @@ namespace MVC5Course.Controllers
             }
 
             client.InjectFrom(viewModel);
-            db.SaveChanges();
+            _repo.UnitOfWork.Commit();
+
+            return RedirectToAction("Read");
+        }
+
+        public ActionResult Delete(int id)
+        {
+            var client = _repo.Find(id);
+
+            if (null == client)
+            {
+                return new HttpNotFoundResult();
+            }
+
+            ViewModels.Client.ClientDeleteViewModel viewModel = new ViewModels.Client.ClientDeleteViewModel
+            {
+                City = client.City,
+                ClientId = client.ClientId,
+                Street1 = client.Street1,
+                Street2 = client.Street2,
+                CreditRating = client.CreditRating,
+                DateOfBirth = client.DateOfBirth,
+                FirstName = client.FirstName,
+                Gender = client.Gender,
+                IdNumber = client.IdNumber,
+                LastName = client.LastName,
+                Latitude = client.Latitude,
+                Longitude = client.Longitude,
+                MiddleName = client.MiddleName,
+                Notes = client.Notes,
+                OccupationId = client.OccupationId,
+                TelephoneNumber = client.TelephoneNumber,
+                XCode = client.XCode,
+                ZipCode = client.ZipCode,
+            };
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public ActionResult Delete(ViewModels.Client.ClientDeleteViewModel viewModel)
+        {
+            var client = _repo.Find(viewModel.ClientId);
+
+            if (null == client)
+            {
+                return new HttpNotFoundResult();
+            }
+
+            _repo.Delete(client);
+            _repo.UnitOfWork.Commit();
 
             return RedirectToAction("Read");
         }
