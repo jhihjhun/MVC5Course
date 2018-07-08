@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MVC5Course.ViewModels.Client.ClientReadViewModel>
+﻿@model MVC5Course.ViewModels.Client.ClientReadViewModel
 
 @{
     ViewBag.Title = "Read";
@@ -7,45 +7,53 @@
 <h2>Read</h2>
 
 <p>
+    @using (Html.BeginForm())
+    {
+        @Html.TextBoxFor(model => model.Condiction.Keyword, null, new { placeholder = "請輸入關鍵字" })
+        <input type="submit" />
+    }
+</p>
+
+<p>
     @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.ClientId)
+            ClientId
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.FirstName)
+            FirstName
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.MiddleName)
+            MiddleName
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.LastName)
+            LastName
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Gender)
+            Gender
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.DateOfBirth)
+            DateOfBirth
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CreditRating)
+            CreditRating
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.XCode)
+            XCode
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.OccupationId)
+            OccupationId
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.TelephoneNumber)
+            TelephoneNumber
         </th>
 
         <th></th>
     </tr>
 
-    @foreach (var item in Model)
+    @foreach (var item in Model.ClientList)
     {
         <tr>
             <td>

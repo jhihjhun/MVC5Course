@@ -25,6 +25,8 @@ namespace MVC5Course.Models
         
         [StringLength(1, ErrorMessage="欄位長度不得大於 1 個字元")]
         public string Gender { get; set; }
+
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public Nullable<System.DateTime> DateOfBirth { get; set; }
         public Nullable<double> CreditRating { get; set; }
         

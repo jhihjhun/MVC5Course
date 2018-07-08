@@ -16,7 +16,7 @@ namespace MVC5Course.Controllers
         {
             var data = db.Client
                 .Take(10)
-                .Select(x => new ViewModels.Client.ClientReadViewModel
+                .Select(x => new ViewModels.Client.ClientReadViewModel.ClientListItem
                 {
                     ClientId = x.ClientId,
                     XCode = x.XCode,
@@ -30,7 +30,43 @@ namespace MVC5Course.Controllers
                     TelephoneNumber = x.TelephoneNumber,
                 }).ToList();
 
-            return View(data);
+            ViewModels.Client.ClientReadViewModel viewModel = new ViewModels.Client.ClientReadViewModel();
+
+
+            viewModel.ClientList = data;
+
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public ActionResult Read(ViewModels.Client.ClientReadViewModel viewModel)
+        {
+            var clientList = db.Client.AsQueryable();
+
+            if (!string.IsNullOrEmpty(viewModel.Condiction.Keyword))
+            {
+                clientList = clientList.Where(x => x.FirstName.Contains(viewModel.Condiction.Keyword));
+            }
+
+            viewModel.ClientList = clientList
+                .Take(10)
+                .Select(x => new ViewModels.Client.ClientReadViewModel.ClientListItem
+                {
+                    ClientId = x.ClientId,
+                    XCode = x.XCode,
+
+                    CreditRating = x.CreditRating,
+                    DateOfBirth = x.DateOfBirth,
+                    FirstName = x.FirstName,
+                    Gender = x.Gender,
+                    LastName = x.LastName,
+                    MiddleName = x.MiddleName,
+                    OccupationId = x.OccupationId,
+                    TelephoneNumber = x.TelephoneNumber
+                }).ToList();
+
+            return View(viewModel);
         }
 
         public ActionResult Update(int id)
