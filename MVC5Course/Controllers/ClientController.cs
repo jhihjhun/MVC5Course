@@ -10,11 +10,11 @@ using System.Net;
 namespace MVC5Course.Controllers
 {
     [RoutePrefix("client")]
-    public class ClientController : Controller
+    public class ClientController : BaseController
     {
 
         //private readonly FabricsEntities db = new FabricsEntities();
-        private readonly ClientRepository _repo = RepositoryHelper.GetClientRepository();
+        //private readonly ClientRepository _repo = RepositoryHelper.GetClientRepository();
 
         [Route("ReadClients")]
         public ActionResult Read()
@@ -194,6 +194,5 @@ namespace MVC5Course.Controllers
 
             return RedirectToAction("Read");
         }
-
     }
 }
