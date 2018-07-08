@@ -327,10 +327,10 @@
     <Content Include="Views\Client\Read.cshtml" />
     <Content Include="Views\Client\Update.cshtml" />
     <Content Include="Views\Client\Delete.cshtml" />
+    <Content Include="Views\AR\ViewTest.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\AR\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
