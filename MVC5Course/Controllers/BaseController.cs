@@ -10,7 +10,14 @@ namespace MVC5Course.Controllers
     public abstract class BaseController : Controller
     {
         //private readonly FabricsEntities db = new FabricsEntities();
-        protected readonly ClientRepository _repo = RepositoryHelper.GetClientRepository();
+        protected ClientRepository _repo;
+        protected ProductRepository _repo2;
+
+        public BaseController()
+        {
+            _repo = RepositoryHelper.GetClientRepository();
+            _repo2 = RepositoryHelper.GetProductRepository(_repo.UnitOfWork);
+        }
 
         protected override void HandleUnknownAction(string actionName)
         {
