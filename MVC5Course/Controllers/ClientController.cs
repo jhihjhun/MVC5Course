@@ -9,12 +9,14 @@ using System.Net;
 
 namespace MVC5Course.Controllers
 {
+    [RoutePrefix("client")]
     public class ClientController : Controller
     {
 
         //private readonly FabricsEntities db = new FabricsEntities();
         private readonly ClientRepository _repo = RepositoryHelper.GetClientRepository();
 
+        [Route("ReadClients")]
         public ActionResult Read()
         {
             //    var data = db.Client
@@ -87,6 +89,7 @@ namespace MVC5Course.Controllers
             return View(viewModel);
         }
 
+        [Route("UpdateClient")]
         public ActionResult Update(int id)
         {
             var client = _repo.Find(id);
