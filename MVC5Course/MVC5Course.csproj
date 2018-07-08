@@ -153,11 +153,13 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ClientController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\ValidationAttributes\IdNumberCheckAttribute.cs" />
     <Compile Include="Models\Client.cs">
       <DependentUpon>Fabrics.tt</DependentUpon>
     </Compile>
@@ -209,6 +211,8 @@
       <DependentUpon>EFGeneratePartialClass.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\Client\ClientReadViewModel.cs" />
+    <Compile Include="ViewModels\Client\ClientUpdateViewModel.cs" />
     <Compile Include="ViewModels\Products\ProductCreateViewModel.cs" />
     <Compile Include="ViewModels\Products\ProductsReadViewModel.cs" />
     <Compile Include="ViewModels\Products\ProductUpdateViewModel.cs" />
@@ -281,6 +285,8 @@
     <Content Include="Views\Products\ProductsRead.cshtml" />
     <Content Include="Views\Products\ProductCreate.cshtml" />
     <Content Include="Views\Products\ProductUpdate.cshtml" />
+    <Content Include="Views\Client\Read.cshtml" />
+    <Content Include="Views\Client\Update.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
