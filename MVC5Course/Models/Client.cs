@@ -41,6 +41,7 @@ namespace MVC5Course.Models
         public Nullable<bool> IsDeleted { get; set; }
     
         public virtual Occupation Occupation { get; set; }
+        partial void Init();
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Order { get; set; }
     }

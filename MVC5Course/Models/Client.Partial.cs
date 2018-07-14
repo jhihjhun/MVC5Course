@@ -7,6 +7,10 @@ namespace MVC5Course.Models
     [MetadataType(typeof(ClientMetaData))]
     public partial class Client
     {
+        partial void Init()
+        {
+            //擴充部分類別的建構子
+        }
     }
     
     public partial class ClientMetaData

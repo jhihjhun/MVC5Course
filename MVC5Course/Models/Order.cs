@@ -27,6 +27,7 @@ namespace MVC5Course.Models
         public string OrderStatus { get; set; }
     
         public virtual Client Client { get; set; }
+        partial void Init();
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderLine> OrderLine { get; set; }
     }
