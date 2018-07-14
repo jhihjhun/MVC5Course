@@ -11,6 +11,8 @@ namespace MVC5Course.Controllers
         // GET: MB
         public ActionResult Index()
         {
+            ViewBag.Msg = "12345";
+
             return View();
         }
     }
