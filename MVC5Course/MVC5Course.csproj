@@ -333,6 +333,7 @@
     <Content Include="Views\AR\Index.cshtml" />
     <Content Include="Views\MB\Index.cshtml" />
     <Content Include="Views\Shared\ErrorNot.cshtml" />
+    <Content Include="Views\Shared\Error_NotImplementedException.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Base\" />

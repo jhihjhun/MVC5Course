@@ -13,9 +13,12 @@ namespace MVC5Course.Controllers
             return View();
         }
 
+        [HandleError(ExceptionType = typeof(NotImplementedException), View = "Error_NotImplementedException")]
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
+
+            throw new NotImplementedException();
 
             return View();
         }
