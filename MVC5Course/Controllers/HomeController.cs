@@ -23,6 +23,7 @@ namespace MVC5Course.Controllers
             return View();
         }
 
+        [GoHome]
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
