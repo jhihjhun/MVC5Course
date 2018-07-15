@@ -369,7 +369,9 @@
                         <a href="@Url.Action("Index","Home")">Home</a>
                         <i class="icon-angle-right"></i>
                     </li>
-                    @RenderSection("breadcrumb", false)
+                    <li>
+                        @RenderSection("breadcrumb", false)
+                    </li>
                 </ul>
                 @RenderBody()
             </div><!--/.fluid-container-->
