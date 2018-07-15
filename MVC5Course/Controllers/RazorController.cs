@@ -11,7 +11,7 @@ namespace MVC5Course.Controllers
         // GET: Razor
         public ActionResult Index()
         {
-            return PartialView();
+            return View();
         }
     }
 }
