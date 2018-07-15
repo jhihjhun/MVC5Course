@@ -23,7 +23,12 @@
 @{
     Layout = "~/Views/Razor/_LayoutMetroDashboard.cshtml";
 }
-
+@section breadcrumb
+{
+    <li>
+        @Html.ActionLink("Dashboard", "Index", "Razor")
+    </li>
+}
 
 <div class="row-fluid">
 
