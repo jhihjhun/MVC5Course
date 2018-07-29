@@ -72,7 +72,7 @@
                 @Html.DisplayFor(modelItem => item.Gender)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DateOfBirth)
+                @Html.DisplayFor(modelItem => item.DateOfBirth,"DateTime")
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.CreditRating)
@@ -88,7 +88,7 @@
             </td>
             <td>
                 @Html.ActionLink("Edit", "Update", "Client", new { id = item.ClientId }, null) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ClientId }) |
                 @Html.ActionLink("Delete", "Delete", "Client", new { id = item.ClientId }, null)
             </td>
         </tr>

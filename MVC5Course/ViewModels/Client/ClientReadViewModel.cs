@@ -30,7 +30,7 @@ namespace MVC5Course.ViewModels.Client
 
             public string Gender { get; set; }
 
-            [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
+            //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
             public Nullable<System.DateTime> DateOfBirth { get; set; }
 
             public Nullable<double> CreditRating { get; set; }

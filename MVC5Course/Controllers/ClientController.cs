@@ -194,5 +194,22 @@ namespace MVC5Course.Controllers
 
             return RedirectToAction("Read");
         }
+
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Client client = _repo.Find(id.Value);
+
+            if (client == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(client);
+        }
     }
 }

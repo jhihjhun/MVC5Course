@@ -1,0 +1,9 @@
+﻿@model DateTime?
+
+@if (Model.HasValue)
+{
+    @Html.Display("", Model.Value.ToString("yyyy-MM-dd"))
+}
+else
+{
+}
